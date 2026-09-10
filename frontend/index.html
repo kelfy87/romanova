@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#151817" />
+    <meta
+      name="description"
+      content="Переводите числа в римские и обратно. Пошаговое объяснение, проверка записи, справочник и тренажёр."
+    />
+    <title>ROMANOVA — римские числа, понятным языком</title>
+    <link rel="icon" href="/public/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a class="brand" href="#converter" aria-label="ROMANOVA — главная"
+          ><span class="brand-mark">R<span>·</span></span
+          ><span>ROMANOVA<small>ЛАБОРАТОРИЯ ЧИСЕЛ</small></span></a
+        >
+        <nav aria-label="Разделы">
+          <a href="#converter" class="active">Конвертер</a
+          ><a href="#guide">Как это работает</a
+          ><a href="#practice">Практика <span>↗</span></a>
+        </nav>
+        <span class="edition">EST. MMXXVI</span>
+      </header>
+      <main>
+        <section id="converter" class="view">
+          <div class="intro">
+            <div>
+              <p class="eyebrow">ИЗ ДЕСЯТИЧНОЙ — В ВЕЧНОСТЬ</p>
+              <h1>Числа. <em>Другим языком.</em></h1>
+              <p class="sub">Две тысячи лет истории. Один точный перевод.</p>
+            </div>
+            <span class="section-number">01 / CONVERTER</span>
+          </div>
+          <div class="workspace">
+            <div class="input-side">
+              <div class="card-top">
+                <span class="eyebrow">ВАШЕ ЧИСЛО</span
+                ><button
+                  class="text-btn"
+                  id="swap"
+                  title="Поменять направление перевода"
+                >
+                  ⇄ <span>Поменять</span>
+                </button>
+              </div>
+              <div class="segmented" aria-label="Направление перевода">
+                <button id="decimal-mode" class="selected" aria-pressed="true">
+                  19 → XIX</button
+                ><button id="roman-mode" aria-pressed="false">XIX → 19</button>
+              </div>
+              <label for="number" id="input-label"
+                >Число в десятичной системе</label
+              >
+              <div class="input-wrap">
+                <input
+                  id="number"
+                  value="2026"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  spellcheck="false"
+                  maxlength="64"
+                  aria-describedby="input-hint error"
+                /><button id="clear" aria-label="Очистить поле">×</button>
+              </div>
+              <div class="hint-row">
+                <p id="input-hint">Целое число от 1 до 3 999</p>
+                <span>10 → R</span>
+              </div>
+              <p id="error" class="error" role="alert"></p>
+              <div class="examples">
+                <span>Попробуйте</span><button data-example="49">49</button
+                ><button data-example="944">944</button
+                ><button data-example="1984">1984</button
+                ><button data-example="3999">3999</button>
+              </div>
+              <div class="extended">
+                <div>
+                  <label for="extended">Большие числа</label>
+                  <p>До 3 999 999 · черта означает × 1 000</p>
+                </div>
+                <input id="extended" type="checkbox" role="switch" />
+              </div>
+            </div>
+            <div class="result-side">
+              <div class="card-top">
+                <span class="eyebrow" id="result-label">РИМСКАЯ ЗАПИСЬ</span
+                ><span class="live-badge">МГНОВЕННЫЙ ПЕРЕВОД</span>
+              </div>
+              <div class="result-center" aria-live="polite" aria-atomic="true">
+                <div id="result" class="result">MMXXVI</div>
+                <p id="equation">2 026 = MMXXVI</p>
+              </div>
+              <div class="result-bottom">
+                <span id="result-note">Классическая запись</span
+                ><button id="copy" class="copy-btn">
+                  ⧉ &nbsp; Скопировать
+                </button>
+              </div>
+            </div>
+          </div>
+          <section class="breakdown">
+            <div class="section-heading">
+              <h2>Логика в деталях<span class="tiny-label">ПОШАГОВО</span></h2>
+              <span id="sum">2 000 + 20 + 6 = 2 026</span>
+            </div>
+            <div id="steps" class="steps"></div>
+            <p class="explanation" id="explanation">
+              Читаем слева направо. Складываем значения от большего к меньшему.
+            </p>
+          </section>
+          <section class="alphabet">
+            <div class="alphabet-title">
+              <p class="eyebrow">ВСЁ НАЧИНАЕТСЯ С СЕМИ ЗНАКОВ</p>
+              <h2>Римский алфавит чисел</h2>
+            </div>
+            <div class="symbols" id="symbols"></div>
+          </section>
+          <div class="bottom-note">
+            <span>Непозиционная система счисления</span
+            ><span>Без нуля. Без дробей. Со своей логикой.</span>
+          </div>
+        </section>
+        <section id="guide" class="view" hidden>
+          <div class="intro">
+            <div>
+              <p class="eyebrow">СЕМЬ ЗНАКОВ. ЧЕТЫРЕ ПРАВИЛА.</p>
+              <h1>Понять. <em>А не запомнить.</em></h1>
+              <p class="sub">
+                Всё, что нужно для уверенного чтения римских чисел.
+              </p>
+            </div>
+            <span class="section-number">02 / FIELD GUIDE</span>
+          </div>
+          <div class="rules">
+            <article>
+              <span class="rule-no">I.</span>
+              <h2>Складывайте по убыванию</h2>
+              <p>
+                Если справа стоит меньший или равный знак, его значение
+                прибавляется.
+              </p>
+              <div class="rule-example">
+                VIII <span>= 5 + 1 + 1 + 1 = 8</span>
+              </div>
+            </article>
+            <article>
+              <span class="rule-no">II.</span>
+              <h2>Меньший перед большим — вычитайте</h2>
+              <p>
+                В стандартной записи допускаются только шесть пар: IV, IX, XL,
+                XC, CD, CM.
+              </p>
+              <div class="rule-example">XC <span>= 100 − 10 = 90</span></div>
+            </article>
+            <article>
+              <span class="rule-no">III.</span>
+              <h2>Не повторяйте лишнего</h2>
+              <p>
+                I, X, C и M подряд пишут не более трёх раз. V, L и D не
+                повторяют. Поэтому 4 — это IV, а 9 — IX.
+              </p>
+              <div class="rule-example">XLIX <span>= 40 + 9 = 49</span></div>
+            </article>
+            <article>
+              <span class="rule-no">IV.</span>
+              <h2>Разбирайте по разрядам</h2>
+              <p>
+                Отдельно запишите тысячи, сотни, десятки и единицы, затем
+                соедините результаты.
+              </p>
+              <div class="rule-example">
+                MCMXCIV <span>= 1 000 + 900 + 90 + 4</span>
+              </div>
+            </article>
+          </div>
+          <div class="guide-bottom">
+            <article>
+              <h2>Почему это не позиционная система?</h2>
+              <p>
+                В десятичной записи цифра 2 означает разные значения в 20 и 200.
+                Римский X всегда означает 10; порядок знаков определяет сложение
+                или вычитание. Привычного основания, как 2 или 16, у римской
+                записи нет.
+              </p>
+              <h2>А где ноль и отрицательные числа?</h2>
+              <p>
+                Классическая римская запись используется здесь для целых
+                положительных чисел от 1 до 3 999. Ноль, дроби и отрицательные
+                числа этот конвертер не записывает.
+              </p>
+            </article>
+            <article>
+              <h2>Как записать больше 3 999?</h2>
+              <p>
+                В расширенном режиме надчёркивание умножает группу на 1 000:
+                <span class="overline">IV</span> = 4 000. Для ввода и
+                копирования используется эквивалентная запись в скобках: (IV) =
+                4 000, (IV)D = 4 500. Под чертой — тысячи, после — остаток до
+                999.
+              </p>
+              <h2>Почему на часах бывает IIII?</h2>
+              <p>
+                Исторически встречались разные варианты, включая IIII вместо IV
+                на циферблатах. Здесь проверяется современная стандартная запись
+                с вычитательными парами; исторические варианты могут не пройти
+                проверку.
+              </p>
+            </article>
+          </div>
+          <details>
+            <summary>Таблица записи по разрядам</summary>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Цифра</th>
+                    <th>Единицы</th>
+                    <th>Десятки</th>
+                    <th>Сотни</th>
+                    <th>Тысячи</th>
+                  </tr>
+                </thead>
+                <tbody id="reference-table"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+        <section id="practice" class="view" hidden>
+          <div class="intro">
+            <div>
+              <p class="eyebrow">ПРОВЕРЬТЕ СЕБЯ</p>
+              <h1>От теории. <em>К практике.</em></h1>
+              <p class="sub">
+                Десять вопросов, чтобы освоить новый язык чисел.
+              </p>
+            </div>
+            <span class="section-number">03 / PRACTICE</span>
+          </div>
+          <div class="practice-card">
+            <div class="practice-top">
+              <label
+                >Сложность
+                <select id="difficulty">
+                  <option value="easy">Начальная · до 100</option>
+                  <option value="medium">Средняя · до 1 000</option>
+                  <option value="hard">Продвинутая · до 3 999</option>
+                </select></label
+              ><span id="score">Верно: 0 из 0</span>
+            </div>
+            <progress
+              id="progress"
+              value="0"
+              max="10"
+              aria-label="Прогресс тренировки"
+            ></progress>
+            <p id="question-label" class="eyebrow">
+              ВОПРОС 1 ИЗ 10 · ЗАПИШИТЕ РИМСКИМИ
+            </p>
+            <div id="question" class="question"></div>
+            <form id="quiz-form">
+              <label for="answer" class="sr-only">Ваш ответ</label
+              ><input
+                id="answer"
+                placeholder="Ваш ответ"
+                autocomplete="off"
+                spellcheck="false"
+                maxlength="32"
+              /><button class="primary" id="check">
+                Проверить <span>↗</span>
+              </button>
+            </form>
+            <p id="feedback" aria-live="polite"></p>
+            <button id="next" class="primary" hidden>Следующий вопрос →</button
+            ><button id="restart" class="text-btn">Начать заново</button>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span class="footer-logo">ROMANOVA</span>
+        <p>Античная система. Современный подход.</p>
+        <a href="#guide">Разобраться в правилах ↗</a>
+      </footer>
+    </div>
+    <div class="toast" id="toast" role="status" hidden></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
