@@ -28,5 +28,8 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
+      - name: Build GitHub Pages version
+        run: npm run build:pages
+
       - name: Run tests
         run: npm test

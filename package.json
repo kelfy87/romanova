@@ -15,6 +15,7 @@
   "scripts": {
     "start": "node backend/src/server.js",
     "dev": "node --watch backend/src/server.js",
+    "build:pages": "node scripts/build-pages.mjs",
     "test": "node --test",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
