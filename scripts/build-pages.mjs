@@ -18,7 +18,10 @@ const indexPath = resolve(destination, "index.html");
 const index = await readFile(indexPath, "utf8");
 await writeFile(
   indexPath,
-  index.replace('data-runtime="server"', 'data-runtime="static"'),
+  index
+    .replace('data-runtime="server"', 'data-runtime="static"')
+    .replaceAll('href="/', 'href="./')
+    .replaceAll('src="/', 'src="./'),
 );
 
 await writeFile(resolve(destination, ".nojekyll"), "");
